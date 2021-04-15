@@ -109,9 +109,9 @@ export default function Application(props) {
   //   });
   // }, []);
 
-  const appointmentsArray = getAppointmentsForDay(state, state.day);
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
 
-  const appointmentList = appointmentsArray.map((appointment) => {
+  const appointmentList = dailyAppointments.map((appointment) => {
     return (
       <Appointment
         key={appointment.id}
