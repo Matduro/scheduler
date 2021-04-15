@@ -1,6 +1,6 @@
-export default function getAppointmentsForDay(state, day) {
+export function getAppointmentsForDay(state, day) {
   //... returns an array of appointments for that day
-  const filteredDay = state.days.find((item) => item.name === day);
+  const filteredDay = state.days.find((eachDay) => eachDay.name === day);
   const newAppoinments = [];
   const filterAppointments = () => {
     for (const appoinment of filteredDay.appointments) {
@@ -11,14 +11,28 @@ export default function getAppointmentsForDay(state, day) {
   return newAppoinments;
 }
 
+export function getInterview(state, interview) {
+  if (interview === null) {
+    return null;
+  }
+
+  for (const key in state.interviewers) {
+    if (state.interviewers[key].id === interview.interviewer) {
+      return { ...interview, interviewer: state.interviewers[key] };
+    }
+  }
+}
+
+//function getAppointmentForDay2()
+
 ///////
 /// Alternate Solution:
 ///////////////////
 
 // export default function getAppointmentsForDay(state, day) {
 //  //... returns an array of appointments for that day
-//   for (const item of state.days) {
-//     if (item.name === day) {
+//   for (const eachDay of state.days) {
+//     if (eachDay.name === day) {
 //       return item.appointments.map((id) => state.appointments[id]);
 //     }
 //   }
