@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
-import getAppointmentsForDay from "helpers/selectors.js";
+import getAppointmentsForDay from "../helpers/selectors";
 
 import "components/Application.scss";
 
@@ -77,12 +77,11 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    // you may put the line below, but will have to remove/comment hardcoded appointments variable
     appointments: {},
   });
 
   const setDay = (day) => setState({ ...state, day });
-  const setDays = (days) => setState((prev) => ({ ...prev, days }));
+  // const setDays = (days) => setState((prev) => ({ ...prev, days }));
 
   useEffect(() => {
     Promise.all([
