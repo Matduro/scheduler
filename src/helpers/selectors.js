@@ -23,8 +23,6 @@ export function getInterview(state, interview) {
   }
 }
 
-//function getAppointmentForDay2()
-
 ///////
 /// Alternate Solution:
 ///////////////////
