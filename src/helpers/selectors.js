@@ -12,17 +12,37 @@ export function getAppointmentsForDay(state, day) {
 }
 
 export function getInterview(state, interview) {
-  if (interview === null) {
-    return null;
-  }
-
-  for (const key in state.interviewers) {
-    if (state.interviewers[key].id === interview.interviewer) {
-      return { ...interview, interviewer: state.interviewers[key] };
+  return (
+    interview && {
+      ...interview,
+      interviewer: state.interviewers[interview.interviewer],
     }
-  }
+  );
+  // if (interview === null) {
+  //   return null;
+  // }
+
+  // for (const key in state.interviewers) {
+  //   if (state.interviewers[key].id === interview.interviewer) {
+  //     return { ...interview, interviewer: state.interviewers[key] };
+  //   }
+  // }
 }
 
+export function getInterviewersForDay(state, day) {
+  // retrieve the day object for that day = Tuesday
+  const dayFound = state.days.find((eachDay) => eachDay.name === day);
+  //console.log("DAYFOUND", dayFound);
+  if (!dayFound) {
+    return [];
+  }
+  // We need to access the appointment ids
+  const interviews = dayFound.interviewers.map(
+    (interviewerId) => state.interviewers[interviewerId]
+  );
+  // We need to find the corresponding interviews
+  return interviews;
+}
 ///////
 /// Alternate Solution:
 ///////////////////
