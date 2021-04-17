@@ -35,7 +35,9 @@ export default function Application() {
       .then(() => {
         setState((prev) => ({ ...prev, appointments }));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        throw err;
+      });
   }
 
   function cancelInterview(id) {
@@ -52,9 +54,9 @@ export default function Application() {
       .then(() => {
         setState((prev) => ({ ...prev, appointments }));
       })
-      .catch((err) =>
-        console.log("We have and error with cancelInterview", err)
-      );
+      .catch((err) => {
+        throw err;
+      });
   }
 
   const setDay = (day) => setState({ ...state, day });
@@ -107,7 +109,6 @@ export default function Application() {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          {/* <DayList days={days} day={day} setDay={setDay} /> */}
           <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
         <img
@@ -118,12 +119,7 @@ export default function Application() {
       </section>
       <section className="schedule">
         {schedule}
-        <Appointment
-          key="last"
-          time="5pm"
-          bookInterview={bookInterview}
-          cancelInterview={cancelInterview}
-        />
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
