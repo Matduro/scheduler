@@ -18,15 +18,6 @@ export function getInterview(state, interview) {
       interviewer: state.interviewers[interview.interviewer],
     }
   );
-  // if (interview === null) {
-  //   return null;
-  // }
-
-  // for (const key in state.interviewers) {
-  //   if (state.interviewers[key].id === interview.interviewer) {
-  //     return { ...interview, interviewer: state.interviewers[key] };
-  //   }
-  // }
 }
 
 export function getInterviewersForDay(state, day) {
@@ -46,6 +37,16 @@ export function getInterviewersForDay(state, day) {
 ///////
 /// Alternate Solution:
 ///////////////////
+
+// if (interview === null) {
+//   return null;
+// }
+
+// for (const key in state.interviewers) {
+//   if (state.interviewers[key].id === interview.interviewer) {
+//     return { ...interview, interviewer: state.interviewers[key] };
+//   }
+// }
 
 // export default function getAppointmentsForDay(state, day) {
 //  //... returns an array of appointments for that day
