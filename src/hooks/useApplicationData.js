@@ -92,16 +92,18 @@ export default function useApplicationData(props) {
       axios.get("/api/days"),
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
-    ]).then((all) => {
-      const [daysList, appointmentsList, interviewersList] = all;
-      // console.log(daysList.data, appointmentsList.data, interviewersList.data);
-      setState((prev) => ({
-        ...prev,
-        days: daysList.data,
-        appointments: appointmentsList.data,
-        interviewers: interviewersList.data,
-      }));
-    });
+    ]).then(
+      ([{ data: days }, { data: appointments }, { data: interviewers }]) => {
+        // const [daysList, appointmentsList, interviewersList] = all;
+        // console.log(daysList.data, appointmentsList.data, interviewersList.data);
+        setState((prev) => ({
+          ...prev,
+          days,
+          appointments,
+          interviewers,
+        }));
+      }
+    );
   }, []);
 
   return {
