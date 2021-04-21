@@ -96,7 +96,7 @@ describe("Application,", () => {
     );
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
   });
-  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+  xit("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
     // axios.delete.mockRejectedValueOnce();
     const { container } = render(<Application />);
 
@@ -160,12 +160,12 @@ describe("Application,", () => {
     ).toBeInTheDocument();
   });
 
-  xit("shows the delete error when failing to delete an existing appointment", async () => {
+  it("shows the delete error when failing to delete an existing appointment", async () => {
     axios.delete.mockRejectedValueOnce();
 
     const { container } = render(<Application />);
 
-    await waitForElement(() => getByText(container, "Archie Cohen"));
+    await waitForElement(() => queryByText(container, "Archie Cohen"));
 
     const appointment = getAllByTestId(
       container,
@@ -174,25 +174,25 @@ describe("Application,", () => {
 
     fireEvent.click(queryByAltText(appointment, "Delete"));
 
-    await waitForElement(() => {
-      getByText(appointment, "Are you sure you would like to delete?");
-    });
+    expect(
+      getByText(appointment, "Are you sure you would like to delete?")
+    ).toBeInTheDocument();
 
     fireEvent.click(queryByText(appointment, "Confirm"));
 
-    await waitForElement(() => getByText(appointment, "Deleting"));
+    expect(getByText(appointment, "Deleting")).toBeInTheDocument();
 
-    await waitForElement(() => {
+    await waitForElement(() =>
       getByText(
         appointment,
         "An error occured while trying to delete your interview appointment, please try again or contact us"
-      );
-    });
+      )
+    );
 
     expect(
       getByText(
         appointment,
-        "An error occured while trying to save your interview appointment, please try again or contact us"
+        "An error occured while trying to delete your interview appointment, please try again or contact us"
       )
     ).toBeInTheDocument();
   });
