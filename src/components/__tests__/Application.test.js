@@ -1,6 +1,7 @@
 import React from "react";
 //import axios from "../../__mocks__/axios";
 import axios from "axios";
+
 import {
   render,
   cleanup,
@@ -14,12 +15,11 @@ import {
   queryByText,
   queryByAltText,
   getByDisplayValue,
-  waitForElementToBeRemoved,
 } from "@testing-library/react";
 
 import Application from "components/Application";
-
-// afterEach(cleanup);
+// jest.mock("axios");
+afterEach(cleanup);
 
 describe("Application,", () => {
   xit("renders without crashing", () => {
@@ -98,7 +98,8 @@ describe("Application,", () => {
     );
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
   });
-  xit("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+    // axios.delete.mockRejectedValueOnce();
     const { container } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -115,6 +116,7 @@ describe("Application,", () => {
     fireEvent.change(getByPlaceholderText(appointment, /Enter Student Name/i), {
       target: { value: "Lydia Miller-Jones" },
     });
+
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
     fireEvent.click(getByText(appointment, "Save"));
 
@@ -127,6 +129,7 @@ describe("Application,", () => {
     );
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   });
+
   xit("shows the save error when failing to save an appointment", async () => {
     axios.put.mockRejectedValueOnce();
 
@@ -146,26 +149,21 @@ describe("Application,", () => {
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
     fireEvent.click(getByText(appointment, "Save"));
 
-    expect(getByText(appointment, "Saving")).toBeInTheDocument();
-
-    await waitForElementToBeRemoved(() => getByText(appointment, "Saving"));
-
-    expect(
+    await waitForElement(
       getByText(
         appointment,
         "An error occured while trying to save your interview appointment, please try again or contact us"
       )
     );
 
-    fireEvent.click(getByAltText(appointment, "Close"));
-
     expect(
-      queryByText(
+      getByText(
         appointment,
         "An error occured while trying to save your interview appointment, please try again or contact us"
       )
-    ).not.toBeInTheDocument();
+    ).toBeInTheDocument();
   });
+
   it("shows the delete error when failing to delete an existing appointment", async () => {
     axios.delete.mockRejectedValueOnce();
 
@@ -180,35 +178,26 @@ describe("Application,", () => {
 
     fireEvent.click(queryByAltText(appointment, "Delete"));
 
-    expect(
-      getByText(appointment, "Are you sure you would like to delete")
-    ).toBeInTheDocument();
+    await waitForElement(() => {
+      getByText(appointment, "Are you sure you would like to delete?");
+    });
 
     fireEvent.click(queryByText(appointment, "Confirm"));
-    expect(getByText(appointment, "Deleting")).toBeInTheDocument();
 
-    await waitForElementToBeRemoved(() => getByText(appointment, "Deleting"));
+    await waitForElement(() => getByText(appointment, "Deleting"));
+
+    await waitForElement(() => {
+      getByText(
+        appointment,
+        "An error occured while trying to delete your interview appointment, please try again or contact us"
+      );
+    });
 
     expect(
       getByText(
         appointment,
-        "An error occured while trying to delete your interview appointment, please try again or contact us"
-      )
-    );
-
-    fireEvent.click(getByAltText(appointment, "Close"));
-
-    expect(
-      queryByText(
-        appointment,
         "An error occured while trying to save your interview appointment, please try again or contact us"
       )
-    ).not.toBeInTheDocument();
-
-    const day = getAllByTestId(container, "day").find((day) =>
-      getByText(day, "Monday")
-    );
-
-    expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+    ).toBeInTheDocument();
   });
 });
