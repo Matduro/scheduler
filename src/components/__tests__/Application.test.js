@@ -1,5 +1,4 @@
 import React from "react";
-//import axios from "../../__mocks__/axios";
 import axios from "axios";
 
 import {
@@ -17,7 +16,7 @@ import {
 } from "@testing-library/react";
 
 import Application from "components/Application";
-// jest.mock("axios");
+//jest.mock("axios");
 afterEach(cleanup);
 
 describe("Application,", () => {
