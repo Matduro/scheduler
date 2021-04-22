@@ -60,6 +60,7 @@ export default function Appointment(props) {
           onClose={back}
         />
       )}
+
       {mode === ERROR_DELETE && (
         <Error
           message="An error occured while trying to delete your interview appointment, please try again or contact us"
