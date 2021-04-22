@@ -36,10 +36,10 @@ _Interview Scheduler is a SPA React application that allows users to book, edit,
 
 ## The Key Features
 
-![]()
-![]()
-![]()
-![]()
+![Main SPA App](https://github.com/Matduro/scheduler/blob/master/docs/MainSchedulerAppPicture.png)
+![Setting up an interview](https://github.com/Matduro/scheduler/blob/master/docs/gif1.gif)
+![](https://github.com/Matduro/scheduler/blob/master/docs/gif2.gif)
+![Saving the interview](https://github.com/Matduro/scheduler/blob/master/docs/gif3.gif)
 
 # Interview Scheduler
 
