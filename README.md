@@ -37,8 +37,17 @@ _Book, modify, and cancel interviews with this modern SPA React application._
 ## The Key Features
 
 ![Main SPA App](https://github.com/Matduro/scheduler/blob/master/docs/MainSchedulerAppPicture.png)
+
+### Initial interview
+
 ![Setting up an interview](https://github.com/Matduro/scheduler/blob/master/docs/gif1.gif)
+
+### Edit
+
 ![Edit the interview](https://github.com/Matduro/scheduler/blob/master/docs/gif4Edit.gif)
+
+### Overall user experience overview
+
 ![Saving the interview](https://github.com/Matduro/scheduler/blob/master/docs/gif2.gif)
 
 # Interview Scheduler
