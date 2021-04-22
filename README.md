@@ -46,7 +46,7 @@ _Book, modify, and cancel interviews with this modern SPA React application._
 
 ![Edit the interview](https://github.com/Matduro/scheduler/blob/master/docs/gif4Edit.gif)
 
-### Overall user experience overview
+### User experience overview
 
 ![Saving the interview](https://github.com/Matduro/scheduler/blob/master/docs/gif2.gif)
 
