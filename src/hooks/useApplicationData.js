@@ -9,6 +9,7 @@ export default function useApplicationData(props) {
     interviewers: {},
   });
 
+  // Counts the number of spots for a given day, and updates the associated day object
   const updateSpots = (dayName, days, appointments) => {
     const dayObject = days.find((day) => dayName === day.name);
     let newTotalSpots = 0;
@@ -23,11 +24,14 @@ export default function useApplicationData(props) {
     return { ...dayObject, spots: newTotalSpots };
   };
 
+  // Creates a new days array, and is meant to be used with updateSpots()
   const newDaysArray = (dayObject, daysArray) => {
     return daysArray.map((day) => {
       return dayObject.name === day.name ? dayObject : day;
     });
   };
+
+  // Books a new interview. Update the State and the Database
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -48,7 +52,6 @@ export default function useApplicationData(props) {
           ...prev,
           appointments,
           days,
-          // days: prev.days.map((day) => ({ ...day, spots: day.spots - 1 })), // This only works on delete, not on edit
         }));
       })
       .catch((err) => {
@@ -56,6 +59,7 @@ export default function useApplicationData(props) {
       });
   }
 
+  // Cancels an existing interview interview. Update the State and the Database
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -76,7 +80,6 @@ export default function useApplicationData(props) {
           ...prev,
           appointments,
           days,
-          //days: prev.days.map((day) => ({ ...day, spots: day.spots + 1 })), // This only works on delete, not on edit
         }));
       })
       .catch((err) => {
@@ -84,9 +87,10 @@ export default function useApplicationData(props) {
       });
   }
 
+  // update the day state
   const setDay = (day) => setState({ ...state, day });
-  // const setDays = (days) => setState((prev) => ({ ...prev, days }));
 
+  // Initial data request from the database
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -94,8 +98,6 @@ export default function useApplicationData(props) {
       axios.get("/api/interviewers"),
     ]).then(
       ([{ data: days }, { data: appointments }, { data: interviewers }]) => {
-        // const [daysList, appointmentsList, interviewersList] = all;
-        // console.log(daysList.data, appointmentsList.data, interviewersList.data);
         setState((prev) => ({
           ...prev,
           days,

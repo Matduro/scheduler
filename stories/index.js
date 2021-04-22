@@ -111,16 +111,6 @@ storiesOf("InterviewerListItem", module)
       setInterviewer={(event) => action("setInterviewer")(interviewer.id)}
     />
   ));
-/*   .add("Clickable", () => (
-    <InterviewerListItem
-      id={interviewer.id}
-      name={interviewer.name}
-      avatar={interviewer.avatar}
-      setInterviewer={action("setInterviewer")}
-    />
-  )); */
-
-// InterviewerList
 
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
