@@ -8,7 +8,7 @@
     "normalize.css": "^8.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.0.0"
+    "react-scripts": "^4.0.3"
   },
   "proxy": "http://localhost:8001",
   "scripts": {
@@ -42,12 +42,14 @@
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.7",
     "@testing-library/react-hooks": "^4.0.1",
+    "babel-loader": "^8.1.0",
     "node-sass": "^4.14.0",
     "prop-types": "^15.7.2",
     "react-test-renderer": "^16.9.0",
     "sass-loader": "^10.1.1"
   },
   "jest": {
+    "resetMocks": false,
     "watchPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/.git/"
